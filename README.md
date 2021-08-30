@@ -131,3 +131,22 @@ and has refs/remotes/origin/master as its full name. <br/>
 The v1.3-rc3 tag has refs/tags/v1.3-rc3 as the full name <br/>
 (tags reside in the refs/tags/ namespace).<br/>
 
+
+In Git, each revision is given a unique identifier (object name), which is a SHA-1 hash  <br/>
+function, based on the contents of the revision. You can select a commit by using its <br/>
+SHA-1 identifier as a 40-character long hexadecimal number (120 bits).<br/>
+
+It is not necessary to give a full 40 characters of the SHA-1 identifier. Git is smart <br/>
+enough to figure out what you meant if you provide it with the first few characters of <br/>
+the SHA-1 revision identifier, as long as the partial SHA-1 is at least four characters <br/>
+long. To be able to use a shortened SHA-1 to select revision, it must be long enough <br/>
+to be unambiguous, that is, there is one and only one commit object which SHA-1 <br/>
+identifier begins with given characters.<br/>
+For example, both dae86e1950b1277e545cee180551750029cfe735 and dae86e <br/>
+name the same commit object, assuming, that there is no other object in <br/>
+your repository whose object name starts with dae86e.<br/>
+
+You can also request that Git use the shortened SHA-1 in place of the full SHA-1 <br/>
+revision identifiers with the --abbrev-commit option. By default, Git will use at <br/>
+least seven characters for the shortened SHA-1; you can change it with the optional <br/>
+parameter, for example, --abbrev-commit=12.<br/>

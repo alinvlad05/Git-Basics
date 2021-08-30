@@ -1,5 +1,6 @@
-#Sourcetree (Nr1 git software)
-A Git GUI that offers a visual representation of your repositories.
+#Sourcetree
+
+A Git GUI that offers a visual representation of your repositories.(Rank 1 in top git software)
 Download: https://www.sourcetreeapp.com/
 
 # Git

@@ -69,3 +69,16 @@ git merge origin/better-random<br/>
 
 Undoing an unpublished merge:<br/>
 git reset --hard @{1}<br/>
+
+The structure that Git uses (on the abstract level) to represent the possible non-linear  <br/>
+history of a project is called a Directed Acyclic Graph (DAG).<br/>
+A directed graph is a data structure from computer science (and mathematics) <br/>
+composed of nodes (vertices) that are connected with directed edges (arrows). <br/>
+A directed graph is acyclic if it doesn't contain any cycles, which means that there is no <br/>
+way to start at some node and follow a sequence of the directed edges to end up back <br/>
+at the starting node.<br/>
+
+Usually, the DAG of revisions is laid out left-to-right (root nodes on the left, leaves on the right) <br/>
+or bottom-to-top (the most recent revisions on top). ASCII-art examples in <br/>
+Git documentation use the left-to-right convention, while the Git <br/>
+command line use bottom-to-top, that is, the most recent first convention.<br/>

@@ -1,7 +1,7 @@
 # Sourcetree
 
-A Git GUI that offers a visual representation of your repositories.(Rank 1 in top git software)
-Download: https://www.sourcetreeapp.com/
+A Git GUI that offers a visual representation of your repositories.(Rank 1 in top git software)<br/>
+Download: https://www.sourcetreeapp.com/ <br/>
 
 # Git
 A version control system is a tool that lets  <br/>

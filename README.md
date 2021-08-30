@@ -82,3 +82,14 @@ Usually, the DAG of revisions is laid out left-to-right (root nodes on the left,
 or bottom-to-top (the most recent revisions on top). ASCII-art examples in <br/>
 Git documentation use the left-to-right convention, while the Git <br/>
 command line use bottom-to-top, that is, the most recent first convention.<br/>
+
+There are two special type of nodes in any DAG:<br/>
+
+Root nodes: These are the nodes (revisions) that have no parents (no outgoing edges).<br/>
+There is at least one root node in the DAG of revisions, <br/>
+which represents the initial (starting) version of a project.<br/>
+
+Leaf nodes (or leaves): These are the nodes that have no children (no incoming edges);<br/>
+there is at least one such node. They represent the most <br/>
+recent versions of the project, not having any work based on them. Usually, <br/>
+each leaf in the DAG of revisions has a branch head pointing to it.<br/>

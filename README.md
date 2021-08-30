@@ -93,3 +93,36 @@ Leaf nodes (or leaves): These are the nodes that have no children (no incoming e
 there is at least one such node. They represent the most <br/>
 recent versions of the project, not having any work based on them. Usually, <br/>
 each leaf in the DAG of revisions has a branch head pointing to it.<br/>
+
+A branch operation is what you use when you want your development process to  <br/>
+fork into two different directions to create another line of development.<br/>
+
+A tag operation is a way to associate a meaningful symbolic name with the specific <br/>
+revision in the repository<br/>
+
+Both branches and tags, sometimes called references (refs) together.<br/>
+
+Git, needs to know which branch tip to advance when creating a new <br/>
+commit. It needs to know which branch is the current one and is checked out into <br/>
+the working directory. Git uses the HEAD pointer for this.<br/>
+Usually, this points to one of branch tips, which, in turn, points to some node <br/>
+in the DAG of revisions, but not always-the detached HEAD situation; hat is, when <br/>
+HEAD points directly to a node in the DAG.<br/>
+
+Git stored branches and tags in files inside .git <br/>
+administrative area, in the .git/refs/heads/ and .git/<br/>
+refs/tags/ directories, respectively. <br/>
+
+The HEAD pointer (usually a symbolic reference,for example ref: <br/>
+refs/heads/master) is stored in .git/HEAD.<br/>
+The master branch is stored in .git/refs/heads/master, <br/>
+and has refs/heads/master as full name <br/>
+(branches reside in the refs/heads/ namespace).<br/>
+
+The remote-tracking branch, origin/master, which remembers <br/>
+the last seen position of the master branch in the remote <br/>
+repository, origin, is stored in .git/refs/remotes/origin/master,<br/>
+and has refs/remotes/origin/master as its full name. <br/>
+The v1.3-rc3 tag has refs/tags/v1.3-rc3 as the full name <br/>
+(tags reside in the refs/tags/ namespace).<br/>
+

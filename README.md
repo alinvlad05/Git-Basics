@@ -175,8 +175,8 @@ Commands, given a single revision as an argument, will show the set of commits r
 from that revision, following the commit ancestry chain, all the way down to the root commits.<br/>
   
 Double dot notation<br/>
-The range, HEAD~4..HEAD, means four commits: HEAD, HEAD^, HEAD^^, and HEAD^^^ <br/>
-or in other words, HEAD~0, HEAD~1, HEAD~2, and HEAD~3, assuming that there are no merge <br/>
+The range, HEAD ~ 4..HEAD, means four commits: HEAD, HEAD^, HEAD^^, and HEAD^^^ <br/>
+or in other words, HEAD ~ 0, HEAD ~ 1, HEAD ~ 2, and HEAD ~ 3, assuming that there are no merge <br/>
 commits starting between the current branch and its fourth ancestor.  <br/>
   
 In view of nonlinear history the double-dot notation A..B, or "between <br/>

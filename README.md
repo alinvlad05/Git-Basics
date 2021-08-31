@@ -157,7 +157,7 @@ As a special case, ^0 means the commit itself;<br/>
 This suffix syntax is composable. You can use HEAD^^ to mean grandparent of HEAD, <br/>
 and parent of HEAD^.<br/>
 
-As a special case, ~ is equivalent to ~1, so, for example, HEAD~ and HEAD^ are equivalent. <br/>
+As a special case, ~ is equivalent to ~ 1, so, for example, HEAD~ and HEAD^ are equivalent. <br/>
 And, HEAD~2 means the first parent of the first parent, or the grandparent, and is <br/>
 equivalent to HEAD^^.<br/>
 

@@ -170,3 +170,21 @@ the nth prior value of the given branch, for example, master@{n}.<br/>
 
 The suffix, @{upstream} (short form <refname>@{u}), which can be applied only to <br/>
 a local branch name, selects the branch that the ref is set to build on top of.<br/>
+
+Commands, given a single revision as an argument, will show the set of commits reachable <br/>
+from that revision, following the commit ancestry chain, all the way down to the root commits.<br/>
+  
+Double dot notation<br/>
+The range, HEAD~4..HEAD, means four commits: HEAD, HEAD^, HEAD^^, and HEAD^^^ <br/>
+or in other words, HEAD~0, HEAD~1, HEAD~2, and HEAD~3, assuming that there are no merge <br/>
+commits starting between the current branch and its fourth ancestor.  <br/>
+  
+In view of nonlinear history the double-dot notation A..B, or "between <br/>
+A and B", is defined as reachable from A and not reachable from B.<br/>
+  
+Say your branches master and experiment diverge. You want to see <br/>
+what is in your experiment branch that hasn't yet been merged into your master <br/>
+branch. You can ask Git to show you a log of just those commits with master..experiment.<br/>
+If, you want to see the opposite—all the commits in master that <br/>
+aren't in experiment—you can reverse the branch names. <br/>
+The experiment..master notation shows you everything in master not reachable from experiment.<br/>

@@ -188,3 +188,19 @@ branch. You can ask Git to show you a log of just those commits with master..exp
 If, you want to see the opposite—all the commits in master that <br/>
 aren't in experiment—you can reverse the branch names. <br/>
 The experiment..master notation shows you everything in master not reachable from experiment.<br/>
+  
+Git allows you to exclude the commits that are reachable from a given revision by <br/>
+prefixing the said revision with a ^.<br/>
+Git allows you to use the --not option, which negates all the following <br/>
+revisions.<br/>
+  
+There is another useful shortcut, namely A^!, which is a range composed of a single <br/>
+commit. For non-merge commits, it is simply A^..A.<br/>
+For merge commits, the A^!, excludes all the parents. With the help of yet <br/>
+another special notation, namely A^@, denoting all the parents of A (A^1, A^2,…, A^n), <br/>
+we can say that A^! is a shortcut for A --not A^@.<br/>
+  
+  Triple-dot notation<br/>
+The last major syntax for specifying revision ranges is the triple-dot syntax, A...B. It <br/>
+selects all the commits that are reachable by either of the two references, but not by <br/>
+both of them.<br/>

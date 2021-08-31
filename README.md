@@ -13,7 +13,7 @@ Get your own repository instance:Create on GitHub a new repository and copy addr
 Open command line and navigate to the chosen directory: <br/>
 git clone https://git.company.com/random (address) <br/>
 
-Add files: <br/>
+Add files: <br/> 
 git add (filename)<br/>
 git status –s<br/>
 It shows:A  file   <br/>

@@ -150,3 +150,23 @@ You can also request that Git use the shortened SHA-1 in place of the full SHA-1
 revision identifiers with the --abbrev-commit option. By default, Git will use at <br/>
 least seven characters for the shortened SHA-1; you can change it with the optional <br/>
 parameter, for example, --abbrev-commit=12.<br/>
+
+If you place ^ at the end of a revision name, Git resolves it to mean a (first) parent  <br/>
+of that revision.<br/>
+As a special case, ^0 means the commit itself;<br/>
+This suffix syntax is composable. You can use HEAD^^ to mean grandparent of HEAD, <br/>
+and parent of HEAD^.<br/>
+
+As a special case, ~ is equivalent to ~1, so, for example, HEAD~ and HEAD^ are equivalent. <br/>
+And, HEAD~2 means the first parent of the first parent, or the grandparent, and is <br/>
+equivalent to HEAD^^.<br/>
+
+Every time your HEAD and your branch head are updated for any reason, Git stores <br/>
+that information for you in this local temporary log of ref history.<br/>
+
+To specify the nth prior value of HEAD in your local repository, you can use <br/>
+the HEAD@{n} notation that you see in the git reflog output. It's same with <br/>
+the nth prior value of the given branch, for example, master@{n}.<br/>
+
+The suffix, @{upstream} (short form <refname>@{u}), which can be applied only to <br/>
+a local branch name, selects the branch that the ref is set to build on top of.<br/>

@@ -267,4 +267,23 @@ actually differ between the two files have one of the following indicator <br/>
 characters in the left print column:<br/>
 +: A line was added here to the second file<br/>
 -: A line was removed here from the first file<br/>
+ 
+ 
+ the --amend flag of the git commit; it allows you to change the very last commit.<br/>
+ If you just want to correct the commit message, you simply commit again, without any staged changes, and fix it:<br/>
+ git commit --amend<br/>
+ If you want to add some more changes to that last commit, you can simply stage <br/>
+them as normal with git add and then commit again, or make the changes and use git commit -a --amend<br/>
+ 
+WARNING: you should never amend a commit that has already been published!<br/>
+This is because amend effectively produces a completely <br/>
+new commit object that replaces the old one. If you're the <br/>
+only person who had this commit, doing this is safe. After publishing the <br/>
+original commit to a remote repository, other people might already have based their <br/>
+new work on that version of the commit. Replacing the original with an amended <br/>
+version will cause problems downstream.<br/>
+ 
+ The old version of commit before amending would be available in the branch reflog and in <br/>
+the HEAD reflog; Just after amend, it would be available as @{1}. <br/>
+Git would keep the old version for a month, by default, unless manually removed.<br/>
   

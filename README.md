@@ -205,7 +205,7 @@ The last major syntax for specifying revision ranges is the triple-dot syntax, A
 selects all the commits that are reachable by either of the two references, but not by <br/>
 both of them.<br/>
 
-  Index/Staging Area<br/>
+# Index/Staging Area<br/>
    Let's consider what happens when we use the git <br/>
 add command to add a file, but did not yet create a new commit adding it.<br/>
 A version control system needs to store such information somewhere. Git uses something <br/>

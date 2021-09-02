@@ -218,7 +218,7 @@ git add takes the content of the file from the working directory and puts it int
 git commit -a command (which is git commit --all), which will take all the changed tracked files,<br/>
 add them to the staging area (as if with git add -u, at least in modern Git), and create a new <br/>
 commit.The new files still need to be explicitly git add to be tracked, and to be included in the new commit.<br/>
-  
+   
   You create a new revision with the git commit command, which takes the <br/>
 files as they are in the staging area and stores that snapshot permanently to <br/>
 your local repository.<br/>

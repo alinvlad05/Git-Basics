@@ -67,7 +67,7 @@ Git just wants you to set up a remote origin as the upstream for the newly <br/>
 created branch (it is using a simple push strategy); this will also push this branch <br/>
 explicitly.<br/>
 
-git push --set-upstream origin better-random<br/>
+git push --set-upstream origin better-random<br/> 
 
 Merging a branch:<br/>
 git merge origin/better-random<br/>

@@ -232,3 +232,21 @@ staging area to the content of your last commit.<br/>
   
   You can use git diff HEAD to compare what is in your working directory with the <br/>
 last commit (or arbitrary commit with git diff <commit>). <br/>
+  
+# Unified Git diff format<br/>
+  
+diff --git a/builtin-http-fetch.c b/http-fetch.c<br/>
+The first line is a git diff header in the form diff --git a/file1 b/file2.<br/>
+--git option means that diff is in the git diff output format.<br/>
+  
+similarity index 95%<br/>
+rename from builtin-http-fetch.c<br/>
+rename to http-fetch.c<br/>
+The first three lines in this example tell us that the file was renamed from <br/>
+builtin-http-fetch.c to http-fetch.c and that these two files are 95% identical.<br/>
+index f3e63d7..e8f44ba 100644<br/>
+The last line in extended diff header tells us about the mode of given file<br/>
+(100644 means that it is an ordinary file and not a symbolic link, and that it doesn't have executable permission bit)<br/>
+Search on google 777,755,644 :)) ![image](https://user-images.githubusercontent.com/69854287/131814596-c4457c27-c760-43ff-b8bb-4a7924d8bd7e.png)<br/>
+
+  

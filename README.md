@@ -17,7 +17,7 @@ Add files: <br/>
 git add (filename)<br/>
 git status –s<br/>
 It shows:A  file   <br/>
-A=added<br/>
+A=added<br/> 
 
 Publishing changes:<br/>
 git push<br/>

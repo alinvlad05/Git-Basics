@@ -247,6 +247,24 @@ builtin-http-fetch.c to http-fetch.c and that these two files are 95% identical.
 index f3e63d7..e8f44ba 100644<br/>
 The last line in extended diff header tells us about the mode of given file<br/>
 (100644 means that it is an ordinary file and not a symbolic link, and that it doesn't have executable permission bit)<br/>
-Search on google 777,755,644 :)) ![image](https://user-images.githubusercontent.com/69854287/131814596-c4457c27-c760-43ff-b8bb-4a7924d8bd7e.png)<br/>
+Search on google 777,755,644 :P :)) <br/>
+Some file permission examples: <br/>
+777 - all can read/write/execute (full access). <br/>
+755 - owner can read/write/execute, group/others can read/execute. <br/>
+644 - owner can read/write, group/others can read only.<br/>
+For the new files, pre-image(the version of the file before the given change) hash is 0000000, <br/>
+the same for the deleted files with post-image(the version of the file after the change) hash.  <br/>
+4-bit object type valid values in binary are 1000 (regular file), 1010 (symbolic link) and 1110 (gitlink) <br/>
 
+@@ -1,8 +1,9 @@<br/>
+This line is in the format @@ from-file-range to-file-range @@. <br/>
+The from-file-range is in the form -<start line>,<number of lines>, <br/>
+and to-file-range is +<start line>,<number of lines>.   <br/>
+  
+Next is the description of where and how files differ. The lines common <br/>
+to both the files begin with a space (" ") indicator character. The lines that <br/>
+actually differ between the two files have one of the following indicator <br/>
+characters in the left print column:<br/>
++: A line was added here to the second file<br/>
+-: A line was removed here from the first file<br/>
   

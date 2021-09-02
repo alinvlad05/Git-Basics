@@ -287,4 +287,16 @@ version will cause problems downstream.<br/>
  The old version of commit before amending would be available in the branch reflog and in <br/>
 the HEAD reflog; Just after amend, it would be available as @{1}. <br/>
 Git would keep the old version for a month, by default, unless manually removed.<br/>
-  
+
+# Anonymous branches
+ What happens if you try to check out something that is not a local branch: for <br/>
+example an arbitrary revision (like HEAD^), or a tag (like v0.9), or a remote-tracking <br/>
+branch (for example, origin/master)?<br/>
+ Older Git refused to switch to non-branch. Nowadays, Git will create an anonymous <br/>
+branch by detaching HEAD pointer and making it refer directly to a commit, rather <br/>
+than being a symbolic reference to a branch.<br/>
+ To create an anonymous branch at the current position explicitly, you can use the --detach <br/>
+option to the checkout command. The detached HEAD state is shown in branch <br/>
+listing as (no branch) in older versions of Git, or (detached from HEAD) or (HEAD detached at ...) in newer.<br/>
+ If you did detach HEAD by mistake, you can always go back to the previous branch with:<br/>
+git checkout (name)<br/>

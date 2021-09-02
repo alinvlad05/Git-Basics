@@ -300,3 +300,5 @@ option to the checkout command. The detached HEAD state is shown in branch <br/>
 listing as (no branch) in older versions of Git, or (detached from HEAD) or (HEAD detached at ...) in newer.<br/>
  If you did detach HEAD by mistake, you can always go back to the previous branch with:<br/>
 git checkout (name)<br/>
+As Git informs you when creating a detached branch, you can always give a name to <br/>
+the anonymous branch with git checkout -b <new-name>. <br/>

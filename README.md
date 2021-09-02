@@ -53,7 +53,7 @@ git checkout -- src\rand.txt<br/>
 If you don't remember how to revert a particular type of change, or to <br/>
 update what is to be committed (using git commit without -a), the <br/>
 output of git status (without -s) contains information about what commands to use.<br/>
-git status<br/>
+git status<br/> 
 
 To isolate this line of development from other changes, create your own named branch, and switch to it: <br/>
 git checkout -b better-random  <br/>

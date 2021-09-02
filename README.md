@@ -269,6 +269,7 @@ characters in the left print column:<br/>
 -: A line was removed here from the first file<br/>
  
  
+# Amending a commit
  the --amend flag of the git commit; it allows you to change the very last commit.<br/>
  If you just want to correct the commit message, you simply commit again, without any staged changes, and fix it:<br/>
  git commit --amend<br/>

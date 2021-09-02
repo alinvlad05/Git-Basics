@@ -4,7 +4,7 @@ A Git GUI that offers a visual representation of your repositories.(Rank 1 in to
 Download: https://www.sourcetreeapp.com/ <br/>
  
 # Git
-A version control system is a tool that lets  <br/>
+A version control system is a tool that lets  <br/> 
 you track the history and attribution of your project files over time (stored in a repository), <br/>
 and which helps the developers in the team to work together.  <br/>
  

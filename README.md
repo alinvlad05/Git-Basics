@@ -302,3 +302,24 @@ listing as (no branch) in older versions of Git, or (detached from HEAD) or (HEA
 git checkout (name)<br/>
 As Git informs you when creating a detached branch, you can always give a name to <br/>
 the anonymous branch with git checkout -b <new-name>. <br/>
+ 
+# Branch operations
+Reset always changes where the current branch points to (moves the ref), <br/>
+while checkout either switches branch, or detaches HEAD at a given revision if it is given non-branch.<br/>
+ 
+ Delete a branch:You can do this with git branch -d.<br/>
+What happens if you delete a branch, and there is no other reference to the part of <br/>
+project history it pointed to? Those revisions will become unreachable and Git would <br/>
+delete them after the HEAD reflog expires (which, with default configuration, is after 30 days).<br/>
+ That is why Git would allow you to delete only the completely merged-in branch, <br/>
+whose all commits are reachable from HEAD.<br/>
+ To delete a branch that was not merged in, risking parts of the DAG becoming <br/>
+unreachable, you need a stronger command, namely, git branch -D.<br/>
+ You can check if the branch was merged in into any other branch, by checking <br/>
+whether git branch --contains <branch> shows anything.  <br/>
+You cannot delete the current branch.<br/>
+ 
+ You can rename a branch with git branch -m (use -M if target name exists and <br/>
+you want to overwrite it); it will rename a branch and move the corresponding <br/>
+reflog (and add rename operation to the reflog), and change the branch in all of its <br/>
+configuration (its description, its upstream, and so on).<br/>

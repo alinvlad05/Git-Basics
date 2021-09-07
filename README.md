@@ -352,3 +352,14 @@ staging area as its second parent. This commit is stored in a special ref: refs/
 Both WIP (stash) and index commits have the revision you were on when saving <br/>
 changes as its first (and only for the index commit) parent.<br/>
  
+ 
+ # Bare repositories
+There are two types of repositories: an ordinary non-bare one, with a working directory and a staging area, <br/>
+and a bare repository, bereft of the working directory. The former type is meant for private solo development, <br/>
+for creating new history, while the latter type is intended for collaboration and synchronizing development results.<br/>
+By convention, bare repositories use the .git extension—for example, project.git<br/>
+ —while non-bare repositories don't have it—for example, project (with the administrative area and the local repository in project/.git). <br/>
+ You can usually omit this extension when cloning, pushing to, or fetching from the repository; <br/>
+ using either http://git.example.com/project.git or http://git.example.com/project as the repository URL will work. <br/>
+ To create the bare repository, you need to add the --bare option to the init or the clone command:<br/>
+ git init --bare project.git<br/>

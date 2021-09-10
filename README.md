@@ -363,3 +363,52 @@ By convention, bare repositories use the .git extension—for example, project.g
  using either http://git.example.com/project.git or http://git.example.com/project as the repository URL will work. <br/>
  To create the bare repository, you need to add the --bare option to the init or the clone command:<br/>
  git init --bare project.git<br/>
+
+ # Tags
+ Git uses two types of tags: lightweight and annotated. A lightweight tag is very much like a branch that doesn't change – <br/>
+ it's just a pointer (reference) to a specific commit in the graph of revisions,<br/>
+ though in refs/tags/ namespace rather than in refs/heads/ one.<br/>
+ 
+ Annotated tags<br/>
+Annotated tags, involve tag objects. Here the tag reference (in refs/tags/) points to a tag object, which in turn points to a commit. <br/>
+ Tag objects contain a creation date, the tagger identity (name and e-mail), and a tagging message. <br/>
+You create an annotated tag with git tag -a (or --annotate). If you don't specify a message for an annotated tag on <br/>
+ the command line (for example, with -m "<message>"), Git will launch your editor so you can enter it.<br/>
+You can view the tag data along with the tagged commit with the git show command<br/>
+ 
+ Signed tags<br/>
+Signed tags are annotated tags with a clear text GnuPG signature of the tag data attached. <br/>
+ You can create it with git tag -s (which uses your committer identity to select the signing key, or user.signingKey if set),<br/>
+ or with git tag -u <key-id>; <br/>
+both versions assume that you have a private GPG key (created, for example, with gpg --gen-key).<br/>
+ Annotated or signed tags are meant for marking a release, while lightweight tags are meant for private or temporary <br/>
+revision labels. For this reason, some Git commands (such as git describe) will ignore lightweight tags by default.<br/>
+ Of course in collaborative workflows it is important that the signed tag is made public, and that there is a way to verify it.<br/>
+ 
+ Publishing tags<br/>
+Git does not push tags by default: you need to do it explicitly. <br/>
+ One solution is to individually push a tag with git push <remote> tag <tag-name> <br/>
+ (here tag <tag> is equivalent to the longer refspec refs/tags/<tag>:refs/tags/<tag>); <br/>
+you can skip tag in most cases, here. <br/>
+ Another solution is to push tags in mass either all the tags—both lightweight and <br/>
+ annotated—with the use of the --tags option, or just all annotated tags that point to pushed commits with --follow-tags.<br/>
+ This explicitness allows you to re-tag (using git tag -f) with impunity, <br/>
+ if it turns out that you tagged the wrong commit, or there is a need for a last-minute <br/>
+ fix—but only if the tag was not made public.<br/>
+When fetching changes, Git automatically follows tags, downloading annotated <br/>
+tags that point to fetched commits. This means that downstream developers will <br/>
+automatically get signed tags, and will be able to verify releases.<br/>
+ To verify a signed tag, you use git tag -v <tag-name>. You need the signer's <br/>
+public GPG key in your keyring for this (imported using for example gpg --import <br/>
+or gpg --keyserver <key-server> --recv-key <key-id>), and of course the <br/>
+tagger's key needs to be vetted in your chain of trust.<br/>
+ 
+ Merging signed tags (merge tags)<br/>
+ Requesting the pull of a signed tag (available since Git version 1.7.9).<br/>
+ In this workflow, you work on changes and, when they are ready, you create and <br/>
+push a signed tag (tagging the last commit in the series). You don't have to push <br/>
+your working branch—pushing the tag is enough. If the workflow involves sending <br/>
+a pull request to the integrator, you create it using a tag as the end commit<br/>
+ The signed tag being pulled is not stored in the integrator's repository, not as a <br/>
+tag object. Its content is stored, hidden, in a merge commit. This is done so as to <br/>
+not pollute the tag namespace with a large number of such working tags.<br/>

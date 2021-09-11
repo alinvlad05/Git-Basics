@@ -412,3 +412,43 @@ a pull request to the integrator, you create it using a tag as the end commit<br
  The signed tag being pulled is not stored in the integrator's repository, not as a <br/>
 tag object. Its content is stored, hidden, in a merge commit. This is done so as to <br/>
 not pollute the tag namespace with a large number of such working tags.<br/>
+
+ # The graduation, or progressive-stability branches workflow <br/>
+ In such situation, one would have at least three integration branches. There would <br/>
+be one branch for the ongoing maintenance work (containing only bug fixes to the <br/>
+last version), to create minor releases. One branch for stable work to create major <br/>
+releases; this branch can also be used for nightly stable builds. And last, one branch <br/>
+for ongoing development, possibly unstable.<br/>
+ You can use this workflow as it is, with only graduation branches, and no other types <br/>
+of branches. You commit bug fixes on the maintenance branch and merge it into <br/>
+the stable branch and development branch, if necessary. You create revisions with <br/>
+the well-tested work on the stable branch, merging it into the development branch <br/>
+when needed (for example, if the new work depends on them). You put the work in <br/>
+progress, possibly unstable, on the development branch. During normal development, <br/>
+you never merge less stable into more stable branches, otherwise you would decrease <br/>
+their stability. It is always more stable into less stable.<br/>
+ In the pure graduation branches workflow, one would create minor releases (with bug fixes) <br/>
+ out of the maintenance branch. Major releases (with new features) are <br/>
+created out of the stable-work branch. After a major release, the stable-work branch <br/>
+is merged into the maintenance branch to begin supporting the new release that was <br/>
+just created. At this point also, an unstable (development) branch can be merged into <br/>
+a stable one. This is the only time when merging upstream, which means merging <br/>
+less stable branches into more stable branches, should be done.<br/>
+ 
+ # The topic branches workflow<br/>
+ The idea behind the topic branches workflow is to create a separate short-lived <br/>
+branch for each topic, so that all the commits belonging to a given topic <br/>
+ (all the steps in its development) are kept together. The purpose of each topic branch is  <br/>
+a development of the new feature, or a creation of a bug fix.<br/>
+ In the topic branches workflow (also called the feature branches workflow), you <br/>
+have are at least two different types of branches. First, there needs to be at least one <br/>
+permanent (or just long-lived) integration branch. This type of branches is used purely <br/>
+for merging. Integration branches are public.<br/>
+   Second, there are separate short-lived temporary feature branches, each intended for <br/>
+the development of a topic or the creation of a bug fix. They are used to carry all the <br/>
+steps, and only the steps required in the development of a feature or a fix; a unit  <br/>
+of work for a developer. These branches can be deleted after the feature or the  <br/>
+bug fix is merged. Topic branches are usually private and are often not present in <br/>
+public repositories.<br/>
+ 
+ 

@@ -626,8 +626,7 @@ separating selected range of revisions to replay from the new base to replay ont
 comparing the common ancestors (base), side merged in (theirs), and side merged into (ours).<br/>
   <br/>
   
-| ancestor  | HEAD | branch  | result |  
-| (base)  |  (ours) | (theirs)  |  | 
+| ancestor (base)  | HEAD (ours) | branch (theirs)  | result |  
 | ------------- | ------------- | ------------- | ------------- | 
 | A  | A  | A  | A  |
 | A  | A  | B  | B  |

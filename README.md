@@ -639,11 +639,11 @@ A          B         C            merge conflict<br/>
 • If one side has a different change from the other, there is merge conflict at the contents level<br/>
   <br/>
   Conflict markers<br/>
-  <<<<<<< HEAD:src/rand.c<br/>
-fprintf(stderr, "Usage: %s <number> [<count>]\n", argv[0]);<br/>
-=======<br/>
-fprintf(stderr, _("Usage: %s <number> [<count>\n"), argv[0]);<br/>
->>>>>>> i18n:src/rand.c<br/>
+<br/>  <<<<<<< HEAD:src/rand.c<br/>
+<br/>fprintf(stderr, "Usage: %s <number> [<count>]\n", argv[0]);<br/>
+<br/>=======<br/>
+<br/>fprintf(stderr, _("Usage: %s <number> [<count>\n"), argv[0]);<br/>
+<br/>>>>>>>> i18n:src/rand.c<br/>
   This means that the ours version on the current branch (HEAD) in the src/rand.c file <br/>
 is there at the top of this block between the <<<<<<< and ======= markers, while the <br/>
 theirs version on the i18n branch being merged (also from src/rand.c) is there at <br/>

@@ -625,13 +625,15 @@ separating selected range of revisions to replay from the new base to replay ont
   Git uses the three-way merge algorithm to come up with the result of the merge, <br/>
 comparing the common ancestors (base), side merged in (theirs), and side merged into (ours).<br/>
   <br/>
-ancestor    HEAD      branch      result<br/>
-(base)     (ours)    (theirs)<br/>
-A          A         A            A<br/>
-A          A         B            B<br/>
-A          B         A            B<br/>
-A          B         B            B  <br/>
-A          B         C            merge conflict<br/>
+  
+| ancestor  | HEAD | branch  | result |  
+| (base)  |  (ours) | (theirs)  |  | 
+| ------------- | ------------- | ------------- | ------------- | 
+| A  | A  | A  | A  |
+| A  | A  | B  | B  |
+| A  | B  | A  | B  |
+| A  | B  | B  | B  |
+| A  | B  | C  | merge conflict  |
   <br/>
   The rules for the trivial tree-level three-way merges are:<br/>
 • If only one side changes a file, take the changed version<br/>

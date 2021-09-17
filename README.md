@@ -664,17 +664,17 @@ command git ls-files --unmerged (or for all the files with git ls-files --stage)
 git show :1:src/rand.c<br/>
 If there is no conflict, the file is in stage 0 of the index.<br/>
 
- # An interactive rebase
- Sometimes, you might want to edit commit deeper in history, or reorganize commits 
-into a logical sequence of steps. One of the built-in tools that you can use in Git for 
-this purpose is git rebase --interactive.
-  # Commands:
-#  p, pick = use commit
-#  r, reword = use commit, but edit the commit message
-#  e, edit = use commit, but stop for amending
-#  s, squash = use commit, but meld into previous commit
-#  f, fixup = like "squash", but discard this commit's log message
-#  x, exec = run command (the rest of the line) using shell
-#  d, drop = remove commit
-  You can, make the interactive rebase test each commit with the --exec option, for example:
-git rebase --interactive --exec "make test"
+ # An interactive rebase<br/>
+ Sometimes, you might want to edit commit deeper in history, or reorganize commits <br/>
+into a logical sequence of steps. One of the built-in tools that you can use in Git for <br/>
+this purpose is git rebase --interactive.<br/>
+   Commands:<br/>
+  p, pick = use commit<br/>
+  r, reword = use commit, but edit the commit message<br/>
+  e, edit = use commit, but stop for amending<br/>
+  s, squash = use commit, but meld into previous commit<br/>
+  f, fixup = like "squash", but discard this commit's log message<br/>
+  x, exec = run command (the rest of the line) using shell<br/>
+  d, drop = remove commit<br/>
+  You can, make the interactive rebase test each commit with the --exec option, for example:<br/>
+git rebase --interactive --exec "make test"<br/>

@@ -678,3 +678,50 @@ this purpose is git rebase --interactive.<br/>
   d, drop = remove commit<br/>
   You can, make the interactive rebase test each commit with the --exec option, for example:<br/>
 git rebase --interactive --exec "make test"<br/>
+  
+ # Scripted rewrite with the git filter-branch<br/>
+In some cases, you might need to use more powerful tools than the interactive rebase <br/>
+to rewrite and clean up the history. You might want something that would rewrite <br/>
+the full history, and would do the rewrite noninteractively, given some specified <br/>
+algorithm to do the rewrite. Such situations are the task for git filter-branch.<br/>
+  First, you need to give it a branch or a set of branches to rewrite, for example, <br/>
+--all to rewrite all the branches.<br/>
+  If you specify no filters, the commits will be recommitted without any changes.<br/>
+  This means that running git filter-branch without any filter can be used to make <br/>
+permanent the effects of grafts or replacements by rewriting the selected commits. <br/>
+  The git filter-branch command supports the following types of filters:<br/>
+ --env-filter: This may be used to modify environments in which a commit is performed. <br/>
+ --tree-filter: This may be used to rewrite the contents of the commit,that is, the tree object the commit refers to. <br/>
+ --index-filter: This may be used to rewrite the index and the staging area from which the rewritten commit will be created. <br/>
+ --parent-filter: This may be used to rewrite the commit's parent list. <br/>
+ --msg-filter: This may be used to rewrite the commit messages. <br/>
+ --commit-filter: This may be used to specify the command to be called instead of git commit-tree. <br/>
+ --tag-name-filter: This may be used to rewrite tag names.<br/>
+  
+ # Reverting a commit<br/>
+  If you need to back-out an existing commit, undoing the changes it brought, you <br/>
+can use git revert.The revert operation creates a commit with reverse of changes. For example,<br/>
+where original commit adds a line, reversion removes it, where original commit removes a line, reversion adds it.<br/>
+  
+# Reverting a faulty merge<br/>
+  Sometimes, you might need to undo an effect of a merge. Suppose that you have <br/>
+merged changes, but it turned out that they were merged prematurely, and that the merge brings regressions.<br/>
+  If you didn't publish this merge commit before you noticed the mistake and the <br/>
+unwanted merge exists only in your local repository, the easiest solution is to drop this commit with<br/>
+git reset --hard HEAD^<br/>
+  What do you do if you realize only later that the merge was incorrect, for example, <br/>
+after one more commit was created on the master branch and published? One possibility is to revert the merge.<br/>
+  To run revert on a merge commit, you need <br/>
+to specify which patch you are reverting or, in other words, which parent is the mainline.<br/>
+  git revert -m 1 HEAD^^<br/>
+  
+# Storing additional information with notes<br/>
+  The notes mechanism is a way to store additional information for an object, usually a commit, <br/>
+without touching the objects themselves.<br/>
+  Each note belongs to some category of notes, so that notes used for different purposes can be kept separate.<br/>
+  git notes add -m 'message' v0.2~3<br/>
+  In Git, notes are stored using extra references in the refs/notes/ namespace.<br/>
+  Notes can also be used to handle marking bugs and bug fixes, and verifying fixes. <br/>
+You often find bugs in commits long after they got published, that's why you need <br/>
+notes for this; if you find a bug before publishing, you would rewrite the commit instead.<br/>
+  

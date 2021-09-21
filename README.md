@@ -745,14 +745,12 @@ submodules, unless properly configured to cross the repository boundary; it is e
 to miss a change. With subtrees, status works normally, while diff and log need <br/>
 some care, because the subproject commits have a different root directory. The latter <br/>
 assumes that you did not decide to not include the subproject history (by squashing <br/>
-subtree merges). Then, the problem is only with the remote-tracking branches in <br/>
-subproject's repository, if any.<br/>
+subtree merges). Then, the problem is only with the remote-tracking branches in subproject's repository, if any.<br/>
 Because the lifecycles of different repositories are separate, updating a submodule <br/>
 inside its containing project requires two commits and two pushes. Updating a <br/>
 subtree-merged subproject is very simple: only one commit and one push. On <br/>
 the other hand, publishing the subproject changes upstream is much easier with 
-submodules, while it requires changeset extraction with subtrees (here tools such  <br/>
-as git subtree help a lot).<br/>
+submodules, while it requires changeset extraction with subtrees (here tools such as git subtree help a lot).<br/>
   The next major issue, and a source of problems, is that the submodule has two <br/>
 sources of the current revision: the gitlink in the superproject and the branches in the 
 submodule's clone of the repository. This means that git remote update works a <br/>
@@ -762,8 +760,7 @@ requires various preparatory actions to avoid creating a lost commit. There is <
 no such issue with subtrees. All the revision changing commands work as usual <br/>
 with subtrees, bringing the subproject directory to the correct version without the <br/>
 requirement of any additional action. Getting changes from the subproject repository <br/>
-is just a subtree merge away. The only difference between ordinary pull is the -s <br/>
-subtree option.<br/>
+is just a subtree merge away. The only difference between ordinary pull is the -s subtree option.<br/>
   Still, sometimes submodules are the right choice. Compared to subtrees, they allow <br/>
 for a subproject (a module) to be not fetched, which is helpful when your code base is <br/>
 massive. Submodules are also useful when the heavy modularization is not natively <br/>
@@ -772,30 +769,27 @@ Submodules might also themselves be superprojects for other submodules, creating
 a hierarchy of subprojects. Using nested submodules is made easier thanks to git <br/>
 submodule status, update, foreach, and sync subcommands all supporting the --recursive switch.<br/>
   
- # Using shallow clones to get truncated history
-  This operation allows you to get a local copy of the repository with 
-the history truncated to a particular specified depth, that is, the number of latest 
-revisions.
-  How do you do it? Just use the --depth option:
-git clone --depth=1 https://git.company.com/project
-  The preceding command clones only the most recent revision of the primary branch. 
-  Since version 1.9, Git supports pull and push operations even with shallow clones, 
-though some care is still required. You can change the depth of a shallow clone by 
-providing the --depth=<n> option to git fetch (note however that tags for the 
-deepened commits are not fetched). To turn a shallow repository into a complete 
-one, use --unshallow.
-  Note, also git clone --depth=1 may still get all the branches and all the tags. 
-This can happen if the remote repository doesn't have HEAD, thus it doesn't have a 
-primary branch selected; otherwise only the tip of the said single branch is fetched. 
-Long-lived projects usually had many releases during their long history. To really 
-save time, you would need then to combine shallow clone with the next solution: 
-branch limiting.
-  # Cloning only a single branch
-  Git, by default, clones all the branches and tags (if you want to fetch notes or 
-replacements, you need to specify them explicitly). You can limit the amount of the 
-history you clone by specifying that you want to clone only a single branch:
-  git clone --branch master --single-branch \ https://git.company.com/project
-  This feature might be quite useful if you don't want detached orphan branches or 
-the opposite: you want only an orphan branch (for example, with a web page for a 
-project). It also works well used together with a shallow clone.
+ # Using shallow clones to get truncated history<br/>
+  This operation allows you to get a local copy of the repository with <br/>
+the history truncated to a particular specified depth, that is, the number of latest revisions.<br/>
+  How do you do it? Just use the --depth option:<br/>
+git clone --depth=1 https://git.company.com/project<br/>
+  The preceding command clones only the most recent revision of the primary branch. <br/>
+  Since version 1.9, Git supports pull and push operations even with shallow clones, <br/>
+though some care is still required. You can change the depth of a shallow clone by <br/>
+providing the --depth=<n> option to git fetch (note however that tags for the <br/>
+deepened commits are not fetched). To turn a shallow repository into a complete one, use --unshallow.<br/>
+  Note, also git clone --depth=1 may still get all the branches and all the tags. <br/>
+This can happen if the remote repository doesn't have HEAD, thus it doesn't have a <br/>
+primary branch selected; otherwise only the tip of the said single branch is fetched. <br/>
+Long-lived projects usually had many releases during their long history. To really <br/>
+save time, you would need then to combine shallow clone with the next solution: branch limiting.<br/>
+  # Cloning only a single branch<br/>
+  Git, by default, clones all the branches and tags (if you want to fetch notes or <br/>
+replacements, you need to specify them explicitly). You can limit the amount of the <br/>
+history you clone by specifying that you want to clone only a single branch:<br/>
+  git clone --branch master --single-branch \ https://git.company.com/project<br/>
+  This feature might be quite useful if you don't want detached orphan branches or <br/>
+the opposite: you want only an orphan branch (for example, with a web page for a project). <br/>
+  It also works well used together with a shallow clone.<br/>
   

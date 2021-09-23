@@ -823,60 +823,6 @@ Your branch is up-to-date with 'origin/master'.<br/>
 nothing will be executed. This mechanism works only for Git commands; you cannot <br/>
 autocorrect subcommands, parameters, and options (as opposed to tab completion).<br/>
   <br/>
-  #  Syntax of the Git attributes file<br/>
-  A gitattributes file is a simple text file that sets up the local configuration <br/>
-on a per-path basis. Blank lines, or lines starting with the hash character (#) are ignored; <br/>
-  thus, a line starting with # serves as a comment, while blank lines can serve as separators for readability.<br/>
-  To specify a set of attributes for a path, put a pattern followed by an attributes list, <br/>
-separated by a horizontal whitespace:<br/>
-  pattern  attribute1 attribute2<br/>
-When more than one pattern matches the path, a later line overrides an earlier line, just like for the .gitignore files<br/>
-(you can also think that the Git attributes files are read from the least specific system-wide file to <br/>
-the most specific local repository file).<br/>
-Git uses a backslash (\) as an escape character for patterns. Thus, for patterns that begin with a hash, <br/>
-you need to put a backslash in front of the first hash (that is written as \#). <br/>
-  Because the attributes information is separated by whitespaces, trailing spaces in the pattern are ignored and <br/>
-inner spaces are treated as end of pattern, unless they are quoted with a backslash (that is, written as "\ ").<br/>
-If the pattern does not contain a slash (/), which is a directory separator, Git will treat the pattern as a shell<br/>
-glob pattern and will check for a match against the pathname relative to the location of the .gitattributes <br/>
-file (or top level for other attribute files). <br/>
-  Thus, for example, the *.c patterns match the C files anywhere down from the place the <br/>
-.gitattributes file resides. A leading slash matches the beginning of the pathname. <br/>
-  For example, /*.c matches bisect.c but not builtin/bisect--helper.c., while *.c pattern would match both.<br/>
-  If the pattern includes at least one slash, Git will treat it as a shell glob <br/>
-suitable for consumption by the fnmatch(3) function call with the FNM_PATHNAME flag.<br/>
-  This means that the wildcards in the pattern will not match the directory separator, that is, the slash (/) in the <br/>
-pathname; the match is anchored to beginning of the path. For example, the include/*.h pattern matches include/version.h but not <br/>
-include/linux/asm.h or libxdiff/includes/xdiff.h. Shell glob wildcards are: * matching any string (including empty), ? matching <br/>
-any single character, and the […] expression matching the character class <br/>
-(inside brackets, asterisks and question marks lose their special meaning); <br/>
-  note that unlike in regular expressions, the complementation/negation of character class<br/>
-  is done with ! and not ^. For example to match anything but a number one can use <br/>
-  [!0-9] shell pattern, which is equivalent to [^0-9] regexp.<br/>
-Two consecutive asterisks (**) in patterns may have a special meaning, but only between two slashes<br/>
-(/**/), or between a slash and at the beginning or the end of pattern. Such a wildcard matches zero or more <br/>
-path components. Thus, a leading ** followed by a slash means match in all directories,<br/>
-while trailing /** matches every file or directory inside the specified directory.<br/>
-  Each attribute can be in one of the four states for a given path. First, it can <br/>
-be set (the attribute has special value of true); this is specified by simply <br/>
-listing the name of the attribute in the attribute list, for example, text. <br/>
-  Second, it can be unset (the attribute has a special value of false); this <br/>
-is specified by listing the name of the attribute prefixed with minus, for <br/>
-example,-text. Third, it can be set to a specific value; this is specified by <br/>
-listing the name of the attribute followed by an equal sign and its value, <br/>
-for example, -text=auto (note that there cannot be any whitespace <br/>
-around the equal sign as opposed to the configuration file syntax). If no <br/>
-pattern matches the path, and nothing says if the path has or does not <br/>
-have attributes, the attribute is said to be unspecified (you can override <br/>
-a setting for the attribute, forcing it to be explicitly unspecified with !text).<br/>
-   If you find yourself using the same set of attributes over and over for <br/>
-many different patterns, you should consider defining a macro attribute. <br/>
-It can be defined in the local, or global, or system-wide attributes file, but <br/>
-only in the top level .gitattributes file. The macro is defined using <br/>
-[attr]<macro> in place of the file pattern; the attributes list defines the <br/>
-expansion of the macro. For example, the built-in binary macro attribute <br/>
-is defined as if using:<br/>
-[attr]binary -diff -merge -text<br/>
   
  # Automating Git with hooks<br/>
   Like many programming tools, Git includes a way to fire custom functionality <br/>

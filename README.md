@@ -793,3 +793,126 @@ history you clone by specifying that you want to clone only a single branch:<br/
 the opposite: you want only an orphan branch (for example, with a web page for a project). <br/>
   It also works well used together with a shallow clone.<br/>
   
+# Customize Git<br/>
+  Command-line completion for Git<br/>
+  Git comes with built-in (but not always installed) support for the auto-completion of <br/>
+Git commands for the bash and zsh shells.<br/>
+  Once the completion for Git is enabled, to test it you can type for example:<br/>
+git check<TAB><br/>
+  With Git completion enabled bash (or zsh) would autocomplete this to git checkout.<br/>
+  Similarly, in an ambiguous case, double Tab shows all the possible completions <br/>
+(though it is not true for all the shells):<br/>
+git che<TAB><TAB><br/>
+checkout      cherry        cherry-pick<br/>
+  The completion feature also works with options; this is quite useful if you don't <br/>
+remember the exact option but only the prefix.<br/>
+  
+  Autocorrection for Git commands<br/>
+  By default, if you type something that looks like a mistyped command, Git helpfully <br/>
+tries to figure out what you meant.<br/>
+  However, with the help.autoCorrect configuration variable set to a positive <br/>
+number, Git will automatically correct and execute the mistyped commands after <br/>
+waiting for the given number of deciseconds (0.1 of second). You can use a negative <br/>
+value of this option for immediate execution, or zero to go back to default:<br/>
+git chekout<br/>
+  WARNING: You called a Git command named 'chekout', which does not exist.<br/>
+Continuing under the assumption that you meant 'checkout'<br/>
+in 0.1 seconds automatically...<br/>
+Your branch is up-to-date with 'origin/master'.<br/>
+  If there is more than one command that can be deduced from the entered text, <br/>
+nothing will be executed. This mechanism works only for Git commands; you cannot <br/>
+autocorrect subcommands, parameters, and options (as opposed to tab completion).<br/>
+  <br/>
+  #  Syntax of the Git attributes file<br/>
+  A gitattributes file is a simple text file that sets up the local configuration <br/>
+on a per-path basis. Blank lines, or lines starting with the hash character (#) are ignored; <br/>
+  thus, a line starting with # serves as a comment, while blank lines can serve as separators for readability.<br/>
+  To specify a set of attributes for a path, put a pattern followed by an attributes list, <br/>
+separated by a horizontal whitespace:<br/>
+  pattern  attribute1 attribute2<br/>
+When more than one pattern matches the path, a later line overrides an earlier line, just like for the .gitignore files<br/>
+(you can also think that the Git attributes files are read from the least specific system-wide file to <br/>
+the most specific local repository file).<br/>
+Git uses a backslash (\) as an escape character for patterns. Thus, for patterns that begin with a hash, <br/>
+you need to put a backslash in front of the first hash (that is written as \#). <br/>
+  Because the attributes information is separated by whitespaces, trailing spaces in the pattern are ignored and <br/>
+inner spaces are treated as end of pattern, unless they are quoted with a backslash (that is, written as "\ ").<br/>
+If the pattern does not contain a slash (/), which is a directory separator, Git will treat the pattern as a shell<br/>
+glob pattern and will check for a match against the pathname relative to the location of the .gitattributes <br/>
+file (or top level for other attribute files). <br/>
+  Thus, for example, the *.c patterns match the C files anywhere down from the place the <br/>
+.gitattributes file resides. A leading slash matches the beginning of the pathname. <br/>
+  For example, /*.c matches bisect.c but not builtin/bisect--helper.c., while *.c pattern would match both.<br/>
+  If the pattern includes at least one slash, Git will treat it as a shell glob <br/>
+suitable for consumption by the fnmatch(3) function call with the FNM_PATHNAME flag.<br/>
+  This means that the wildcards in the pattern will not match the directory separator, that is, the slash (/) in the <br/>
+pathname; the match is anchored to beginning of the path. For example, the include/*.h pattern matches include/version.h but not <br/>
+include/linux/asm.h or libxdiff/includes/xdiff.h. Shell glob wildcards are: * matching any string (including empty), ? matching <br/>
+any single character, and the […] expression matching the character class <br/>
+(inside brackets, asterisks and question marks lose their special meaning); <br/>
+  note that unlike in regular expressions, the complementation/negation of character class<br/>
+  is done with ! and not ^. For example to match anything but a number one can use <br/>
+  [!0-9] shell pattern, which is equivalent to [^0-9] regexp.<br/>
+Two consecutive asterisks (**) in patterns may have a special meaning, but only between two slashes<br/>
+(/**/), or between a slash and at the beginning or the end of pattern. Such a wildcard matches zero or more <br/>
+path components. Thus, a leading ** followed by a slash means match in all directories,<br/>
+while trailing /** matches every file or directory inside the specified directory.<br/>
+  Each attribute can be in one of the four states for a given path. First, it can <br/>
+be set (the attribute has special value of true); this is specified by simply <br/>
+listing the name of the attribute in the attribute list, for example, text. <br/>
+  Second, it can be unset (the attribute has a special value of false); this <br/>
+is specified by listing the name of the attribute prefixed with minus, for <br/>
+example,-text. Third, it can be set to a specific value; this is specified by <br/>
+listing the name of the attribute followed by an equal sign and its value, <br/>
+for example, -text=auto (note that there cannot be any whitespace <br/>
+around the equal sign as opposed to the configuration file syntax). If no <br/>
+pattern matches the path, and nothing says if the path has or does not <br/>
+have attributes, the attribute is said to be unspecified (you can override <br/>
+a setting for the attribute, forcing it to be explicitly unspecified with !text).<br/>
+   If you find yourself using the same set of attributes over and over for <br/>
+many different patterns, you should consider defining a macro attribute. <br/>
+It can be defined in the local, or global, or system-wide attributes file, but <br/>
+only in the top level .gitattributes file. The macro is defined using <br/>
+[attr]<macro> in place of the file pattern; the attributes list defines the <br/>
+expansion of the macro. For example, the built-in binary macro attribute <br/>
+is defined as if using:<br/>
+[attr]binary -diff -merge -text<br/>
+  
+ # Automating Git with hooks<br/>
+  Like many programming tools, Git includes a way to fire custom functionality <br/>
+contained in the user-provided code (custom scripts), when certain important pre-defined <br/>
+actions occur, that is, when certain events trigger. Such a functionality <br/>
+invoked as a event handler is called a hook. It allows to take an additional action <br/>
+and, at least for some hooks, also to stop the triggered functionality.<br/>
+Hooks in Git can be divided into the client-side and the server-side hooks.<br/>
+  Client-side hooks are triggered by local operations (on client) such as committing, applying <br/>
+a patch series, rebasing, and merging. <br/>
+  Server-side hooks on the other hand run on the server when the network operations such as receiving pushed commits occur.<br/>
+You can also divide hooks into pre hooks and post-hooks. <br/>
+  Pre hooks are called before an operation is finished, usually before the next step while performing <br/>
+an operation. If they exit with a nonzero value, they will cancel the current Git operation.<br/>
+  Post hooks are invoked after an operation finishes and can be used for notification and logs; they cannot cancel an operation.<br/>
+  The hooks in Git are executable programs (usually scripts), which are stored in the hooks/ subdirectory <br/>
+  of the Git repository administrative area, that is in .git/hooks/ <br/>
+for non-bare repositories. Hook programs are named each after an event that triggers <br/>
+it; this means that if you want for one event to trigger more than one script, you will need to implement.<br/>
+  
+ # Command aliases for Git<br/>
+  It is very easy in theory to create an <br/>
+alias. You simply need to create an alias.<command-name> configuration variable; <br/>
+its value is the expansion of alias.<br/>
+  One of the uses for aliases is defining short abbreviations for commonly used <br/>
+commands and their arguments. Another is creating new commands. Here are a <br/>
+couple of examples you might want to set up:<br/>
+ git config --global alias.co checkout<br/>
+ git config --global alias.ci commit<br/>
+ git config --global alias.lg log --graph --oneline --decorate<br/>
+  The preceding setup means that typing, for example, git ci would be the same as <br/>
+typing git commit. Aliases take arguments just as the regular Git commands do. <br/>
+Git does not provide any default aliases that are defining shortcuts for the common <br/>
+operations.Arguments are split by space, the usual shell quoting and escaping is supported; in <br/>
+particular, you can use a quote pair ("a b") or a backslash (a\ b) to include space in a single argument.<br/>
+  You cannot have the alias with the same name as a Git command;<br/>
+  You cannot use aliases to change the behavior of commands.<br/>
+  The reasoning behind this restriction is that it could make existing scripts and hooks fail unexpectedly.<br/>
+  Aliases that hide existing Git commands (with the same name as Git commands) are simply ignored.<br/>

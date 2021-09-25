@@ -8,7 +8,7 @@ A version control system is a tool that lets you track the history and attributi
 over time (stored in a repository), and which helps the developers in the team to work together.  <br/> 
   
 Create a new repository:git init <br/> 
-Get your own repository instance:Create on GitHub a new repository and copy address. <br/>
+Get your own repository instance:Create on GitHub a new repository and copy address. <br/> 
 Open command line and navigate to the chosen directory: <br/>
 git clone https://git.company.com/random (address) <br/>
 
